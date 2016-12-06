@@ -1,0 +1,15 @@
+Vinculo cnpj
+#Converte de .pfx para .pem
+openssl pkcs12 -in certificadoSoftwareHouse.pfx -nocerts -out certificadoSoftwareHouse.pem -nodes
+
+#Converte .pem para .key
+openssl rsa -in certificadoSoftwareHouse.pem -out certificadoSoftwareHouse.key
+
+#Assina o arquivo cnpj com a chave .key e envia o resultado para ./cripto
+openssl dgst -sha256 -sign certificadoSoftwareHouse.key -out ./cripto cnpj
+
+#converte o arquvio ./cripto para signature em base64
+openssl base64 -in ./cripto -out signature
+
+#Chave correta gerada dia 30/11/2016
+cUCLwKTZxxO1+C0rQHEja7Tkf5UGi3ALEZy+wMkmATFZilTXC6KCideDxNmUsxO8L68eD77K1ZFmAXytILhBu3nAvKR40vxt4Ljv/DiUnQMpigr2cR+0UqtTAgV6C5x96rLa0OhIQQW4rm9y7XX/leLRrXnKEXxey+H2hwZ5UxIJTjv8FA9MNDScryQQtf49NNtzoFYs+U5zfNkBPf6XgDMV3GyUvwx83mDEtBCAnpoPHDQinCfkY1FraoV1ew75vmyFktHbD38F1ViSuZMOy6FO1yJsDIxPR9ENBmJizdSDajBaVxpWpJVUWOVOt+jVbGrvHONOgtVLv0GR4fwpVA==
